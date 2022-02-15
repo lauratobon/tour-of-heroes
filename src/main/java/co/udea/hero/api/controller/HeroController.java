@@ -84,4 +84,27 @@ public class HeroController {
         log.info("Rest request buscar heroes por id: "+ id);
         return ResponseEntity.ok(heroService.getHeroNo404(id));
     }
+
+    @PostMapping(value= "actualizar",
+            consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "Edita un heroe con su id",  response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Hero editado existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public void updateHero(@RequestBody Hero hero){
+        heroService.updateHero(hero);
+    }
+
+    @DeleteMapping(value= "borrar",
+            consumes = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiOperation(value = "Borra un heroe con su id, lo obtiene del json",
+            response = Hero.class)
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Hero borrado existosamente"),
+            @ApiResponse(code = 400, message = "La petición es invalida"),
+            @ApiResponse(code = 500, message = "Error interno al procesar la respuesta")})
+    public void deleteHero(@RequestBody Hero hero){
+        heroService.deleteHero(hero);
+    }
 }

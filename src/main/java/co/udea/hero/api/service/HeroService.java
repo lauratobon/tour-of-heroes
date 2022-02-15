@@ -18,42 +18,58 @@ public class HeroService {
 
     private HeroRepository heroRepository;
 
-   public HeroService(HeroRepository heroRepository){
+    public HeroService(HeroRepository heroRepository) {
         this.heroRepository = heroRepository;
     }
 
-    public Hero getHero(Integer id){
+    public Hero getHero(Integer id) {
         Optional<Hero> optionalHero = heroRepository.findById(id);
-        if(!optionalHero.isPresent()){
-            log.info("No se encuentra un heroe con ID:"+id);
+        if (!optionalHero.isPresent()) {
+            log.info("No se encuentra un heroe con ID:" + id);
 
         }
         return optionalHero.get();
 
     }
 
-    public List<Hero> searchHeroes(String param){
-       return heroRepository.search(param);
+    public List<Hero> searchHeroes(String param) {
+        return heroRepository.search(param);
     }
 
-    public Hero getHeroNo404(Integer id){
+    public Hero getHeroNo404(Integer id) {
         Optional<Hero> optionalHero = heroRepository.findById(id);
-        if(!optionalHero.isPresent()){
-            log.info("Undefined ID:"+id);
+        if (!optionalHero.isPresent()) {
+            log.info("Undefined ID:" + id);
 
         }
         return optionalHero.get();
 
     }
 
-    public List<Hero> getHeroes(){
+    public List<Hero> getHeroes() {
         //TODO mejorar el control de excepciones
         List<Hero> heroesList = heroRepository.findAll();
         return heroesList;
     }
 
 
-    public Hero addHero(Hero hero){
+    public Hero addHero(Hero hero) {
         return heroRepository.save(hero);
+    }
+
+    public Hero updateHero(Hero hero) {
+        Optional<Hero> optionalHero = heroRepository.findById(hero.getId());
+        if (!optionalHero.isPresent()) {
+            log.info("Undefined ID:" + hero.getId() + hero.getName());
+        } else {
+            return heroRepository.save(hero);
+        }
+
+
+        return hero;
+    }
+
+    public void deleteHero(Hero hero) {
+        heroRepository.delete(hero);
     }
 }
