@@ -1,9 +1,20 @@
 package co.udea.hero.api.model;
 
-public class Hero {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="heroes4")
+public class Hero {
+    @Id
+    @Column(name = "id", nullable = false)
     private Integer id;
+
+    @Column(name = "name")
     private String name;
+
 
     public Hero() {
     }

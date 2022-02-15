@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.jpa.hibernate.default_schema",
+      "type": "java.lang.String",
+      "description": "Description for spring.jpa.hibernate.default_schema."
+  }
+] }
